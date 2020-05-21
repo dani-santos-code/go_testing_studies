@@ -38,8 +38,3 @@ func (c Circle) Area() float64 {
 type Shape interface {
 	Area() float64
 }
-
-// Perimeter calculates the perimeter of a rectangle
-// func Perimeter(r Rectangle) float64 {
-// 	return 2 * (r.Width + r.Height)
-// }
