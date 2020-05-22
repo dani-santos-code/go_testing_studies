@@ -5,6 +5,9 @@ import (
 	"fmt"
 )
 
+// ErrInsufficientFunds is a global variable
+var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
+
 // Bitcoin type
 type Bitcoin int
 
@@ -33,7 +36,7 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 // Withdraw allows to withdraw amount from wallet
 func (w *Wallet) Withdraw(amount Bitcoin) error {
 	if amount > w.balance {
-		return errors.New("oh, no")
+		return ErrInsufficientFunds
 	}
 	w.balance -= amount
 	return nil
