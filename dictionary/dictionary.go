@@ -15,6 +15,8 @@ const (
 	ErrNotFound = DicErr("could not find the word you were looking for")
 	// ErrWordExists constant
 	ErrWordExists = DicErr("this word has already been defined")
+	// ErrWordDoesNotExist constante
+	ErrWordDoesNotExist = DicErr("cannot update the word because it does not exist")
 )
 
 // Search returns a term
@@ -39,5 +41,21 @@ func (d Dictionary) Add(word, definition string) error {
 	default:
 		return err
 	}
+	return nil
+}
+
+// Update allos for update
+func (d Dictionary) Update(word, definition string) error {
+	_, err := d.Search(word)
+
+	switch err {
+	case ErrNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		d[word] = definition
+	default:
+		return err
+	}
+
 	return nil
 }
