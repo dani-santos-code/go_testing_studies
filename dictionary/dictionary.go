@@ -1,15 +1,20 @@
 package dictionary
 
-import "errors"
-
 // Dictionary type
 type Dictionary map[string]string
 
-var (
+// DicErr type
+type DicErr string
+
+func (e DicErr) Error() string {
+	return string(e)
+}
+
+const (
 	// ErrNotFound constant
-	ErrNotFound = errors.New("could not find the word you were looking for")
+	ErrNotFound = DicErr("could not find the word you were looking for")
 	// ErrWordExists constant
-	ErrWordExists = errors.New("this word has already been defined")
+	ErrWordExists = DicErr("this word has already been defined")
 )
 
 // Search returns a term
