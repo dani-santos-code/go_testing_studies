@@ -34,17 +34,24 @@ func assertStrings(t *testing.T, got string, want string) {
 
 func TestAdd(t *testing.T) {
 	d := Dictionary{}
-	d.Add("name", "Dani")
+	d.Add("car", "A means of transportation")
 
-	want := "Dani"
-	got, err := d.Search("name")
+	word := "car"
+	definition := "A means of transportation"
+
+	assertDefinition(t, d, word, definition)
+}
+
+func assertDefinition(t *testing.T, dictionary Dictionary, word, definition string) {
+	t.Helper()
+
+	got, err := dictionary.Search(word)
 
 	if err != nil {
-		t.Fatal("should find added word:", err)
+		t.Fatal("should find added word", err)
 	}
 
-	if got != want {
-		t.Errorf("got %q, want %q", got, want)
+	if definition != got {
+		t.Errorf("got %q want %q", got, definition)
 	}
-
 }
